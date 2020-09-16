@@ -105,6 +105,9 @@ header .navbar a:hover {
     background-color: var(--color-yellow-dark);
     width: 80%;
     padding: 0.5rem;
+    display: grid;
+    cursor: pointer;
+    height: 26rem;
 }
 
 .card .card_img_container {
@@ -116,15 +119,33 @@ header .navbar a:hover {
    height: 20rem;
    object-fit: fill;
 }
+.card_img_container{
+    position: relative;
+}
+.card .featured {
+    background-color: var(--color-yellor-soft);
+    color: #111;
+    padding: 2px;
+    position: absolute;
+    right: 5px;
+    border-radius: 8px;
+    top: -8px;
+}
+
+.card_content {
+    align-items: center;
+}
 
 .card_content,
-.card_info {~
+.card_info {
     padding:  0.89rem;
 }
 
 .card_info{
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between; 
+
+
 }
 
 .card_price {

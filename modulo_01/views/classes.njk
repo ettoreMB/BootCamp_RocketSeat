@@ -1,0 +1,42 @@
+{% extends "layout.njk" %}
+
+{% block content %}
+<div class="wrapper">
+    <h1>Aulas</h1>
+</div>
+
+    <section class="cards">
+        {% for item in items%}
+        <div class="card" id="{{item.id}}">
+            <div class="card_img_container">
+                <img src="http://i3.ytimg.com/vi/FsbvGMkPHBQ/maxresdefault.jpg" alt="">
+                {% if item .featured %}
+                    <div class="featured">Featured</div>
+                {% endif %}
+            </div>
+            <div class="card_content">
+                <p>{{item.title}}</p>
+            </div>
+            <div class="card_info">
+                <p>{{item.duration}}</p>
+                <p class="card_price">{{item.price}}</p>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </section>
+
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <a class="close_modal"><i class="fas fa-times-circle fa-3x"></i></a>
+
+            <div class="modal_content">
+                <iframe src="https://youtube.com/embed/aCaZFks8gro" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+{% endblock %}
+   
