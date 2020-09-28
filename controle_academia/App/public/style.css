@@ -75,6 +75,7 @@ header .navbar {
     animation-name: up;
     animation-duration: 900ms;
     animation-timing-function: ease-in-out;
+    min-height: 500px;
 }
 
 @keyframes up {
@@ -86,4 +87,40 @@ header .navbar {
         opacity: 1;
         
     }
+}
+
+/*Detalhes*/
+
+.details {
+   padding: 32px;
+}
+
+.details .item {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 16px 0;
+}
+
+.details .item:last-child{
+    border: none;
+}
+
+
+.details h3,
+.details .item div:nth-child(1) {
+    color: #777;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.7px;
+}
+
+.details .item div:nth-child(2) {
+    color: #555;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.details h3 {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--primary-color);
 }
