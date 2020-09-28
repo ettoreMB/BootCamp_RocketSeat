@@ -90,21 +90,6 @@ header .navbar {
     }
 }
 
-<<<<<<< HEAD
-/*Detalhes*/
-
-.details {
-   padding: 32px;
-}
-
-.details .item {
-    border-bottom: 1px solid rgba(0,0,0,0.1);
-    padding: 16px 0;
-}
-
-.details .item:last-child{
-    border: none;
-=======
 /*Details*/
 
 .details {
@@ -118,17 +103,13 @@ header .navbar {
 
 .details .item:last-child {
     border:  none;
->>>>>>> dc5786a5858631f21c37518c7ed6d3d22b82c4a9
-}
+    }
 
 
 .details h3,
 .details .item div:nth-child(1) {
     color: #777;
-<<<<<<< HEAD
-=======
     font-weight: normal;
->>>>>>> dc5786a5858631f21c37518c7ed6d3d22b82c4a9
     font-size: 14px;
     line-height: 24px;
     letter-spacing: 0.7px;
@@ -145,8 +126,6 @@ header .navbar {
     font-weight: bold;
     color: var(--primary-color);
 }
-<<<<<<< HEAD
-=======
 
 .details .item  div:nth-child(2) span {
     padding: 8px 16px;
@@ -193,4 +172,3 @@ button[type="submit"] {
     letter-spacing: 0.8px;
     font-size: 16px;
 }
->>>>>>> dc5786a5858631f21c37518c7ed6d3d22b82c4a9

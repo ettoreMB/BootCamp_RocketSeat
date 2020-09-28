@@ -12,9 +12,7 @@ routes.get('/instructors', (req,res) => {
     return res.render('instructors/index')
 })
 
-routes.get('/instructors/create', (req, res) =>{
-    return res.render('instructors/create')
-})
+routes.get('/instructors/create', instructors.create)
 
 
 routes.post('/instructors', instructors.post)
