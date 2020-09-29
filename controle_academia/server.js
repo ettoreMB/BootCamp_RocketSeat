@@ -6,6 +6,8 @@ const server = express()
 
 server.use(express.static('App/public'))
 
+
+server.use(express.urlencoded({extended:true}))
 server.set('view engine', 'njk')
 server.use(routes)
 nunjucks.configure('App/views', {
