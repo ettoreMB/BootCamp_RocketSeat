@@ -13,6 +13,7 @@ routes.get('/instructors', (req,res) => {
 })
 
 routes.get('/instructors/create', instructors.create)
+routes.get('/instructors/:id', instructors.show)
 
 
 routes.post('/instructors', instructors.post)
