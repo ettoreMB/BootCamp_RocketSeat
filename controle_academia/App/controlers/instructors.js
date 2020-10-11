@@ -1,5 +1,6 @@
 const fs = require("fs")
 const data = require("../../data.json")
+const {age} = require("../utils")
 
 exports.post = (req,res)=> {
     const keys = Object.keys(req.body)
@@ -48,5 +49,17 @@ exports.show = (req, res) => {
 
     if (!foundInstructor) return res.send("Instructor not found") 
 
-    return res.render('instructors/show', {instructor: foundInstructor})
+
+    const instructor = {
+        ...foundInstructor,
+        age: age(foundInstructor.birth),
+        services: foundInstructor.services.split(","),
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
+    }
+
+    return res.render('instructors/show', {instructor})
+}
+
+exports.edit = (req, res) => {
+    return res.render("instructors/edit")
 }
