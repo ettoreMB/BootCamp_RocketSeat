@@ -1,6 +1,49 @@
 const fs = require("fs")
 const data = require("../../data.json")
-const {age} = require("../utils")
+const {age, date} = require("../utils")
+
+
+
+exports.create = (req, res) =>{
+    return res.render('instructors/create')
+} 
+
+exports.show = (req, res) => {
+    const { id} = req.params
+
+    const foundInstructor = data.instructors.find((instructor) => {
+        return instructor.id == id
+    })
+
+    if (!foundInstructor) return res.send("Instructor not found") 
+
+
+    const instructor = {
+        ...foundInstructor,
+        age: age(foundInstructor.birth),
+        services: foundInstructor.services.split(","),
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
+    }
+
+    return res.render('instructors/show', {instructor})
+}
+
+exports.edit = (req, res) => {
+    const {id} = req.params
+
+    const foundInstructor = data.instructors.find((instructor) => {
+        return instructor.id == id
+    })
+
+    if (!foundInstructor) return  alert('structor not found')
+
+    const instructor = {
+        ...foundInstructor,
+        birth: date(foundInstructor.birth)
+    }
+
+    return res.render("instructors/edit", {instructor})
+}
 
 exports.post = (req,res)=> {
     const keys = Object.keys(req.body)
@@ -31,35 +74,52 @@ exports.post = (req,res)=> {
         fs.writeFile("data.json", JSON.stringify(data,null,2), (err) =>  {
             if (err) return res.send('Write File Error')
 
-            return res.redirect('/instructors')
+            return res.redirect(`instructors/${id}`)
         })
 
 }
 
-exports.create = (req, res) =>{
-    return res.render('instructors/create')
-} 
-
-exports.show = (req, res) => {
-    const { id} = req.params
-
-    const foundInstructor = data.instructors.find((instructor) => {
-        return instructor.id == id
+exports.put = (req, res) => {
+    const {id} = req.body
+    let index = 0
+    const foundInstructor = data.instructors.find((instructor, foundIndex) => {
+        if ( id == instructor.id) {
+            index === foundIndex
+            return true
+        }
     })
 
-    if (!foundInstructor) return res.send("Instructor not found") 
-
+    if (!foundInstructor) return  alert('structor not found')
 
     const instructor = {
         ...foundInstructor,
-        age: age(foundInstructor.birth),
-        services: foundInstructor.services.split(","),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
+        ...req.body,
+        birth: Date.parse(req.body.birth)
     }
 
-    return res.render('instructors/show', {instructor})
+    data.instructors[index] = instructor
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) =>{
+        if (err) return res.send('Write File error!')
+
+        return res.redirect(`instructors/${id}`)
+    })
+
+
 }
 
-exports.edit = (req, res) => {
-    return res.render("instructors/edit")
+exports.delete = (req, res) => {
+    const {id} = req.body
+
+    const filteredInstructors = data.instructors.filter((instructor) => {
+        return instructor.id != id 
+    })
+
+    data.instructors = filteredInstructors
+
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+        if(err) return res("!!Write File Error")
+
+        return res.redirect('/instructors')
+    })
 }

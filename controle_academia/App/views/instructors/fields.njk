@@ -1,16 +1,16 @@
  <div class="item">
                 <div>Foto Perfil</div>
-                <div><input type="url" name="avatar_url" placeholder="http://"></div>
+                <div><input type="url" name="avatar_url" placeholder="http://" value="{{instructor.avatar_url}}"></div>
             </div>
 
             <div class="item">
                 <div>Nome</div>
-                <div><input type="text" id="name" name="name" placeholder="Seu Nome"></div>
+                <div><input type="text" id="name" name="name" placeholder="Seu Nome" value="{{instructor.name}}"></div>
             </div>
 
             <div class="item">
                 <div>Data nascimento</div>
-                <div><input type="date" name="birth"></div>
+                <div><input type="date" name="birth" value="{{instructor.birth}}"></div>
             </div>
 
         <div class="item">
@@ -25,7 +25,7 @@
         <div class="item">
             <div>Especialidades</div>
             <div>
-                <input type="text" name="services" placeholder="Separe os serviços por virgulas">
+                <input type="text" name="services" placeholder="Separe os serviços por virgulas" value="{{instructor.services}}">
             </div>
         </div>
 
