@@ -16,9 +16,16 @@ module.exports = {
         return age
     },
     date: function(timestamp) {
-        const date =  new Date(timestamp)
+        const date =  new Date(timestamp) 
+
         const year = date.getFullYear()
-        const month = date.getMonth( ) + 1
+        const month = `0${date.getUTCMonth() + 1}`.slice(-2)
+        const day = `0${date.getUTCDay()}`.slice(-2)
         
+        return {
+            iso: `${year}-${month}-${day}`,
+            birthDay: `${day}-${month}-${year}`,
+            format: `${day}/${month}/${year}`
+        }
     }
 } 

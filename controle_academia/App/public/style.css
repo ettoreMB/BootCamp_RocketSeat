@@ -186,3 +186,98 @@ a.button {
     background-color: rgb(248, 122, 108);
     margin-top: 10px;
 }
+
+/* === TABLE === */
+.table-container {
+    display: block;
+    padding: 32px;
+}
+
+.table-container table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+td, th {
+    text-align: center;
+    padding: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--quarternary-color);
+}
+
+tr:last-child td {
+    border: none;
+}
+
+.table-container .button {
+    display: initial;
+    margin: 0;
+    width: auto;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+}
+
+tbody tr td:first-child div {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+}
+
+tbody tr td:first-child span {
+    width: 56px;
+    height: 56px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+th {
+    text-transform: uppercase;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+    letter-spacing: 0.7px;
+}
+
+.card.table-container {
+    display: grid;
+    grid-template: 64px 1fr 32px / 1fr;
+}
+
+.table-container .header {
+    align-self: start;
+}
+
+.table-container .header,
+.table-container .header form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.table-container .header form input {
+    border: 1px solid #888;
+    padding: 2px 8px;
+    margin-right: 8px;
+}
+
+/* === PAGINATION === */
+
+.table-container .pagination {
+    align-self: end;
+    justify-self: center;
+    color: var(--primary-color);
+}
+
+.table-container .pagination * {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin-right: 16px;
+}
+
+.table-container .pagination a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}

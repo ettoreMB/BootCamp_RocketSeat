@@ -4,8 +4,8 @@
 
     <div class="card container table-container">
         <div class="header">
-            <a href="/instructors/create" class="button">novo</a>
-            <form action="/instructors" method="GET">
+            <a href="/members/create" class="button">novo</a>
+            <form action="/members" method="GET">
                 <input type="text" name="filter" placeholder="Nome ou Acompanhamento" value="{{ filter }}">
                 <button type="submit" class="button">Filtrar</button>
             </form>
@@ -20,26 +20,26 @@
                 </tr>
             </thead>
             <tbody>
-                {% for instructor in instructors %}
+                {% for member in members %}
                     <tr>
                         <td>
                             <div>
-                                <span style="background-image: url({{ instructor.avatar_url }})"></span>
-                                {{ instructor.name }}
+                                <span style="background-image: url({{ member.avatar_url }})"></span>
+                                {{ member.name }}
                             </div>
                         </td>
                         <td class="can-hide-2">
                             <div>
-                                {% for service in instructor.services %}
+                                {% for service in member.services %}
                                     <span class="label">{{ service }}</span>
                                 {% endfor %}
                             </div>
                         </td>
                         <td class="can-hide">
-                            {{ instructor.students }}
+                            {{ member.students }}
                         </td>
                         <td>
-                            <a href="/instructors/{{ instructor.id }}" class="button">ver</a>
+                            <a href="/members/{{ member.id }}" class="button">ver</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -47,4 +47,5 @@
         </table>
         <div class="pagination" data-page="{{ pagination.page }}" data-total="{{ pagination.totalPages }}" data-filter="{{ filter }}"></div>
     </div>
+
 {% endblock content %}

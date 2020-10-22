@@ -3,13 +3,16 @@ const data = require("../../data.json")
 const {age, date} = require("../utils")
 
 
+exports.index =(req,res) => {
 
+    return res.render('instructors/index', {instructors: data.instructors})
+}
 exports.create = (req, res) =>{
     return res.render('instructors/create')
-} 
+}
 
 exports.show = (req, res) => {
-    const { id} = req.params
+    const {id} = req.params
 
     const foundInstructor = data.instructors.find((instructor) => {
         return instructor.id == id
@@ -24,8 +27,9 @@ exports.show = (req, res) => {
         services: foundInstructor.services.split(","),
         created_at: new Intl.DateTimeFormat("pt-BR").format(foundInstructor.created_at),
     }
-
+    
     return res.render('instructors/show', {instructor})
+    
 }
 
 exports.edit = (req, res) => {
@@ -35,12 +39,13 @@ exports.edit = (req, res) => {
         return instructor.id == id
     })
 
-    if (!foundInstructor) return  alert('structor not found')
+    if (!foundInstructor) return  alert('structor not found!')
 
     const instructor = {
         ...foundInstructor,
-        birth: date(foundInstructor.birth)
+        birth: date(foundInstructor.birth).iso
     }
+    console.log(instructor)
 
     return res.render("instructors/edit", {instructor})
 }
@@ -74,7 +79,7 @@ exports.post = (req,res)=> {
         fs.writeFile("data.json", JSON.stringify(data,null,2), (err) =>  {
             if (err) return res.send('Write File Error')
 
-            return res.redirect(`instructors/${id}`)
+            return res.redirect(`instructors`)
         })
 
 }
@@ -112,12 +117,13 @@ exports.delete = (req, res) => {
     const {id} = req.body
 
     const filteredInstructors = data.instructors.filter((instructor) => {
-        return instructor.id != id 
+        
+        return instructor.id !== id 
     })
 
     data.instructors = filteredInstructors
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+    fs.writeFile("data.json", JSON.stringify(data.instructors, null, 2), (err) => {
         if(err) return res("!!Write File Error")
 
         return res.redirect('/instructors')

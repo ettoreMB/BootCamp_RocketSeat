@@ -1,12 +1,11 @@
-{
-  "instructors": [
-    {
-      "id": 1,
-      "name": "ettore",
-      "avatar_url": "htt://123.com",
-      "birth": 946692000000,
-      "created_at": 1603153713581,
-      "services": "oii"
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "ettore",
+    "avatar_url": "http://oi.com.br",
+    "birth": -24381043200000,
+    "gender": "F",
+    "created_at": 1603394631820,
+    "services": "fd"
+  }
+]

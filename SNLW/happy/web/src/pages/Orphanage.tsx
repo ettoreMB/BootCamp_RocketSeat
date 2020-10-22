@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiClock, FiInfo, FiArrowLeft } from "react-icons/fi";
+import { FiClock, FiInfo} from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { useHistory, useParams } from 'react-router-dom';
 import mapIcon from '../utils/mapIcon'
-import mapMarkerImg from '../images/map_marker.svg';
 import '../styles/pages/orphanage.css';
 import api from "../services/api";
 import Sidebar from "../components/Sidebar";
@@ -35,6 +34,7 @@ export default function Orphanage() {
   const { goBack } = useHistory();
   const [orphanage, setOrphanage] = useState<Orphanage>()
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  
 
   useEffect(() => {
       api.get(`orphanages/${params.id}`).then(response => {
