@@ -9,4 +9,3 @@ for (item of menuItems) {
     }
 }
 
-console.log('oi')
