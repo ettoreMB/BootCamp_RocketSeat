@@ -1,11 +1,12 @@
 const currentPage =  location.pathname
-const menuItems = document.querySelectorAll("header .links a")
-console.log(currentPage)
+const menuItems = document.querySelectorAll("header .navbar  a")
+
 
 
 for (item of menuItems) {
-    if(currentPage == item.getAttribute("href")) {
-        item.classList.add("active")
+    if(currentPage.includes(item.getAttribute('href'))) {
+        item.classList.add('active')
     }
 }
+
 

@@ -10,13 +10,18 @@
         <h3>Detalhes</h3>
 
         <div class="item">
-            <div>Instrutor</div>
+            <div>Membro</div>
             <div>{{member.name}}</div>
         </div>
 
         <div class="item">
             <div>Idade</div>
-            <div>{{member.age}}</div>
+            <div>{{member.birth}}</div>
+        </div>
+
+        <div class="item">
+            <div>e-mail</div>
+            <div>{{member.email}}</div>
         </div>
 
         <div class="item">
@@ -25,12 +30,22 @@
         </div>
 
         <div class="item">
-            <div>Acompanhamento</div>
+            <div>Objetivo</div>
             <div>
-                {% for service in member.services %}
-                    <span>{{service}}</span>
-                {% endfor %}
+                
+                    <span>{{member.goals}}</span>
+              
             </div>
+        </div>
+
+        <div class="item">
+            <div>Altura</div>
+            <div>{{member.height}}</div>
+        </div>
+
+        <div class="item">
+            <div>Peso</div>
+            <div>{{member.weight}}</div>
         </div>
 
         <div class="item">

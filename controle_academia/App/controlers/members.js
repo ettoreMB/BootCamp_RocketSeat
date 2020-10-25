@@ -1,6 +1,6 @@
 const fs = require("fs")
 const data = require("../../data.json")
-const {age, date} = require("../utils")
+const {date} = require("../utils")
 
 
 exports.index =(req,res) => {
@@ -24,8 +24,7 @@ exports.show = (req, res) => {
 
     const member = {
         ...foundMember,
-        age: age(foundMember.birth),
-        services: foundMember.services.split(","),
+        birth: date(foundMember.birth).birthDay,
         created_at: new Intl.DateTimeFormat("pt-BR").format(foundMember.created_at),
     }
     
@@ -44,7 +43,7 @@ exports.edit = (req, res) => {
 
     const member = {
         ...foundMember,
-        birth: date(foundMember.birth).iso
+        birth: date(foundMember.birth).birthDay
     }
     console.log(member)
 
@@ -60,24 +59,25 @@ exports.post = (req,res)=> {
             }
         }
 
-        let {avatar_url, birth, services, name,gender} = req.body
+        
 
-        birth = Date.parse(birth)
+        birth = Date.parse(req.body.birth)
+        
         const created_at = Date.now()
-        const id = Number(data.members.length + 1)
+        let id = 1
+        const lasMemeber = data.members[data.members.lenght -1]
+            if (lasMemeber) {
+                id = lasMemeber.id + 1
+            }
 
 
         data.members.push({
+            ...req.body,
             id,
-            name,
-            avatar_url,
-            birth,
-            gender,
-            created_at,
-            services,
+            birth
         })
 
-        fs.writeFile("data.json", JSON.stringify(data.members,null,2), (err) =>  {
+        fs.writeFile("data.json", JSON.stringify(data,null,2), (err) =>  {
             if (err) return res.send('Write File Error')
 
             return res.redirect(`members`)
@@ -119,12 +119,13 @@ exports.delete = (req, res) => {
 
     const filteredMembers = data.members.filter((member) => {
         
-        return member.id !== id 
+        return member.id != id 
     })
 
     data.members = filteredMembers
 
-    fs.writeFile("data.json", JSON.stringify(data[members], null, 2), (err) => {
+    fs.writeFile
+    ("data.json", JSON.stringify(data, null, 2), (err) => {
         if(err) return res("!!Write File Error")
 
         return res.redirect('/members')

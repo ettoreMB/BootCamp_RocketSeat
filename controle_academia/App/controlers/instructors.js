@@ -70,7 +70,7 @@ exports.post = (req,res)=> {
             id,
             name,
             avatar_url,
-            birth,
+            birth, 
             gender,
             created_at,
             services,
@@ -118,13 +118,13 @@ exports.delete = (req, res) => {
 
     const filteredInstructors = data.instructors.filter((instructor) => {
         
-        return instructor.id !== id 
+        return instructor.id != id 
     })
 
     data.instructors = filteredInstructors
 
-    fs.writeFile("data.json", JSON.stringify(data.instructors, null, 2), (err) => {
-        if(err) return res("!!Write File Error")
+    fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) => {
+        if(err) return res("!Write File Error!")
 
         return res.redirect('/instructors')
     })

@@ -101,7 +101,7 @@ header .navbar {
     padding: 16px 0;
 }
 
-.details .item:last-child {
+.details .item:nth-last-child(2) {
     border:  none;
     }
 
@@ -142,13 +142,18 @@ header .navbar {
 
 /*Form*/
 
-form input {
+form input,
+form select
+{
     width: 100%;
     outline: none;
     color: #555;
     font-weight: bold;
     font-size: 18px;
+    background-color: rgba(214, 214, 214, 0.3);
+    border-radius: 8px;
 }
+
 
 input[type="radio"] {
     width: initial;
