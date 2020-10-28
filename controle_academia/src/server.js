@@ -5,14 +5,14 @@ const methodOverride = require ('method-override')
 
 const server = express()
 
-server.use(express.static('App/public'))
+server.use(express.static('public'))
 server.use(express.urlencoded({extended:true}))
 server.set('view engine', 'njk')
 server.use(methodOverride('_method'))
 
 server.use(routes)
 
-nunjucks.configure('App/views', {
+nunjucks.configure('src/app/views', {
     express: server,
     autoescape: false,
     noCache: true,
