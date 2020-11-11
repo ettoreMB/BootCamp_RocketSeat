@@ -1,47 +1,42 @@
-
-const {date} = require("/src/lib/utils")
+const Member = require('../../models/member')
+const {date,age} = require("../../lib/utils")
 
 module.exports = {
     index(req,res) {
-    return res.render('members/index', {members: data.members})
+        Member.all((members) => {
+            return res.render('members/index', {members})
+        })
+    
     },
     create(req,res) {
-    return res.render('members/create')
+        Member.instructorsSelectOptions((options) => {
+        return res.render('members/create',{ instructorOptions: options })
+        })
+    
+
     },
     show(req,res) {
-    const {id} = req.params
+        Member.find(req.params.id, (member)=> {
+            if (!member) return res.send('Member not found!')
 
-    const foundMember = data.members.find((member) => {
-        return member.id == id
-    })
+        Member.instructorsSelectOptions((option) => {
+            return res.render('members/show', {member})
+        })
+            
+        })
 
-    if (!foundMember) return res.send("member not found") 
-
-
-    const member = {
-        ...foundMember,
-        birth: date(foundMember.birth).birthDay,
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundMember.created_at),
-    }
-    
-    return res.render('members/show', {member})
     },
     edit(req,res) {
-     const {id} = req.params
 
-    const foundMember = data.members.find((member) => {
-        return member.id == id
+    Member.find(req.params.id, (member) => {
+        if (!member) return res.send('Member not found!')
+
+        Member.instructorsSelectOptions((options) => {
+        return res.render('members/edit',{ member, instructorOptions: options })
+        })
+
     })
-
-    if (!foundMember) return  alert('structor not found!')
-
-    const member = {
-        ...foundMember,
-        birth: date(foundMember.birth).birthDay
-    }
-    console.log(member)
-
-    return res.render("members/edit", {member})
+     
     },
 
     post(req,res) {
@@ -53,79 +48,24 @@ module.exports = {
                 }
             }
     
+            Member.create(req.body, (member) => {
+                return res.redirect(`members/${member.id}`)
+            })    
             
-    
-            birth = Date.parse(req.body.birth)
-            
-            const created_at = Date.now()
-            let id = 1
-            const lasMemeber = data.members[data.members.lenght -1]
-                if (lasMemeber) {
-                    id = lasMemeber.id + 1
-                }
-    
-    
-            data.members.push({
-                ...req.body,
-                id,
-                birth
-            })
-    
-            fs.writeFile("data.json", JSON.stringify(data,null,2), (err) =>  {
-                if (err) return res.send('Write File Error')
-    
-                return res.redirect(`members`)
-            })
     },
     put(req,res) {
-        const {id} = req.body
-        let index = 0
-        const foundMember = data.members.find((member, foundIndex) => {
-            if ( id == member.id) {
-                index === foundIndex
-                return true
-            }
-        })
     
-        if (!foundMember) return  alert('structor not found')
+       Member.update(req.body, ()=>{
+           return res.redirect(`members/${req.body.id}`)
+       })
     
-        const member = {
-            ...foundMember,
-            ...req.body,
-            birth: Date.parse(req.body.birth)
-        }
-    
-        data.members[index] = member
-    
-        fs.writeFile("data.json", JSON.stringify(data, null, 2), (err) =>{
-            if (err) return res.send('Write File error!')
-    
-            return res.redirect(`members/${id}`)
-        })
+
     },
     delete(req,res) {
-        const {id} = req.body
+       Member.delete(req.body.id, () => {
+        return res.redirect('members')
+       })
+    
 
-        const filteredMembers = data.members.filter((member) => {
-            
-            return member.id != id 
-        })
-    
-        data.members = filteredMembers
-    
-        fs.writeFile
-        ("data.json", JSON.stringify(data, null, 2), (err) => {
-            if(err) return res("!!Write File Error")
-    
-            return res.redirect('/members')
-        })
     }
-}
-
-
-
-
-
-
-
-
+ }

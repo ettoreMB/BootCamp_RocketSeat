@@ -14,8 +14,8 @@
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th class="can-hide-2">Acompanhamento</th>
-                    <th class="can-hide">Alunos</th>
+                    <th class="can-hide-2">email</th>
+                    <th class="can-hide">objetivo</th>
                     <th>Ação</th>
                 </tr>
             </thead>
@@ -30,13 +30,13 @@
                         </td>
                         <td class="can-hide-2">
                             <div>
-                                {% for service in member.services %}
-                                    <span class="label">{{ service }}</span>
-                                {% endfor %}
+                                
+                                    <span class="label">{{ member.email }}</span>
+                                
                             </div>
                         </td>
                         <td class="can-hide">
-                            {{ member.students }}
+                            {{ member.goals }}
                         </td>
                         <td>
                             <a href="/members/{{ member.id }}" class="button">ver</a>

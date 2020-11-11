@@ -1,22 +1,18 @@
             <div class="item">
-                <div>Foto Perfil</div>
-                <div><input type="url" name="avatar_url" placeholder="http://" value="{{member.avatar_url}}"></div>
-            </div>
-
-            <div class="item">
                 <div>Nome</div>
                 <div><input type="text" id="name" name="name" placeholder="Seu Nome" value={{member.name}}></div>
             </div>
 
-            <div class="item">
+             <div class="item">
                 <div>Email</div>
                 <div><input type="email" id="email" name="email" placeholder="Seu email" value={{member.email }}></div>
             </div>
 
             <div class="item">
-                <div>Data nascimento</div>
-                <div><input type="date" name="birth" value={{member.birth}}></div>
+                <div>Foto Perfil</div>
+                <div><input type="url" name="avatar_url" placeholder="http://" value={{member.avatar_url}}></div>
             </div>
+
 
             <div class="item">
                 <div>Genero</div>
@@ -31,13 +27,13 @@
                 <div>
                     <select name="goals" value="{{member.goals}}">
                         <option value="lost"
-                        {% if member.goal == "Perda de Peso" %}selected{% endif %}>
+                        {% if member.goals == "Perda de Peso" %}selected{% endif %}>
                             Perda de Peso
                         </option>
-                        <option value="Manter" {% if member.goal == "maintain" %}selected{% endif %}>
+                        <option value="Manter" {% if member.goals == "maintain" %}selected{% endif %}>
                             Manter Peso
                         </option>
-                        <option value="Ganho de Massa" {% if member.goal == "gain" %}selected{% endif %}>
+                        <option value="Ganho de Massa" {% if member.goals == "gain" %}selected{% endif %}>
                             Ganho de Massa</option>
                         </select>
                 </div>
@@ -45,12 +41,28 @@
 
         <div class="item">
             <div>Peso</div>
-            <div><input type="number" id="weight" name="weight" placeholder="Seu Peso" value={{member.weight }}></div>
+            <div><input type="number" id="wheight" name="wheight" placeholder="Seu Peso" value={{member.wheight }}></div>
         </div>
 
         <div class="item">
             <div>Altura</div>
             <div><input type="number" id="height" name="height" placeholder="Altura em cm" value={{member.height}}></div>
+        </div>
+
+        <div class="item">
+            <div>Instrutor</div>
+            <div>
+                <select name="instructor">
+                    {% for instructor in instructorOptions %}
+                    <option value="{{instructor.id}}"
+                        {% if member.instructor_id == instructor.id %}
+                        {% endif %}
+                    >
+                        {{instructor.name}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
         </div>
 
         <button type="submit">Salvar</button>
