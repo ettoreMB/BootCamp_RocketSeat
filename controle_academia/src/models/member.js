@@ -5,14 +5,12 @@ const { query } = require("../config/db")
 module.exports  = {
     all(callback) {
         db.query(`SELECT * FROM members
-        ORDER BY name ASC
         `, (err, results) =>{
             if(err) throw `DataBase Error ${err}`
 
             callback(results.rows)
-        })
-
-        
+            console.log(results)
+        })      
         
     },
     create(data, callback){
@@ -61,6 +59,19 @@ module.exports  = {
                 callback(results.rows[0])
         })
     },
+    findBy(filter, callback){
+        db.query(`
+        SELECT * FROM members
+        WHERE members.name ILIKE '%${filter}%'
+        OR members.email ILIKE '%${filter}%'
+        ORDER BY name ASC
+        `, (err, results) =>{
+            if(err) throw `DataBase Error ${err}`
+
+            callback(results.rows)
+        })
+    },
+
     update(data, callback) {
         const query = `
             UPDATE members SET
@@ -108,5 +119,37 @@ module.exports  = {
                 callback(results.rows)
             }
         )
-    }
+    },
+    paginate(params) {
+        const {filter, limit, offset, callback } = params
+
+        let query = "",
+            filterQuery = "",
+            totalQuery = `(SELECT COUNT(*) FROM members) AS total`
+
+        if (filter) {
+            filterQuery = `
+                WHERE members.name ILIKE '%${filter}%'
+                OR members.email ILIKE '%${filter}%'
+            `
+
+            totalQuery = `(
+                SELECT count(*) FROM members
+                ${filterQuery}
+            ) as total`
+        }
+
+        query = `
+            SELECT members.* FROM members
+            ${filterQuery}
+            LIMIT $1
+            OFFSET $2
+        `
+
+        db.query(query, [limit, offset], (err, results) => {
+            if(err) throw `DataBase Error ${err}`
+
+            callback(results.rows)
+        })
+    },
 }
