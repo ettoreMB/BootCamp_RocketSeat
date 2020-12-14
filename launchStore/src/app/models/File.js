@@ -1,14 +1,13 @@
 const db = require('../../config/db')
 
 module.exports = {
-  create(filename, path, product_id) { // retornando para post
+  create({filename, path, product_id}) { // retornando para post
 
     const query = `  
       INSERT INTO files (
         name,
         path,
         product_id
-        
     ) VALUES ($1, $2, $3) 
       RETURNING id`
     
@@ -20,4 +19,5 @@ module.exports = {
     ]
 
     return db.query(query, values)
-  }, 
+  }
+}

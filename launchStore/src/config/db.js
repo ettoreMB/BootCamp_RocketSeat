@@ -8,7 +8,7 @@ module.exports =
         password: "250791",
         host: 'localhost',
         port:5432,
-        database: 'launchbase',
+        database: 'launchstoredb',
 
     })
 

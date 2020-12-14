@@ -23,29 +23,29 @@
 </div>
 
 <div class="item">
-    <div>Description</div>
+    <div>Descrição</div>
     <div>
         <textarea name="description">{{product.description}}</textarea>
     </div>
 </div>
 
 <div class="item">
-    <div>Picture</div>
+    <div>Fotos</div>
     <div>
         <div id="photos-upload">
-               <input
-                id="photos-input"
-                type="file" 
-                name="photos" 
-                multiple
-                accept="image/*"
-                onchange="PhotosUpload.handleFileInput(event)"
+          <input
+            id="photos-input"
+            type="file" 
+            name="photos" 
+            multiple = "multiple"
+            accept="image/*"
+            onchange="PhotosUpload.handleFileInput(event)"
             >
             <p>Selecione até 6 fotos</p>
         </div>
          <div id="photos-preview">
-            {% if files %}
-                {% for image in files  %}
+            {% if product.files %}
+                {% for image in product.files  %}
                     <div class="photo" id="{{image.id}}">
                         <img src="{{image.src}}" alt="{{image.name}}">
                         <i class="material-icons"
@@ -66,10 +66,10 @@
     <div>
 
         <input 
-        type="text" 
+        type="text" handleFileInput(event)
         name="price" 
         placeholder="Preço do Produto" 
-        value="{{product.price}}"
+        value="{{product.formatedPrice}}"
         onkeydown="Mask.apply(this,'formatBRL')">
     </div>
 
