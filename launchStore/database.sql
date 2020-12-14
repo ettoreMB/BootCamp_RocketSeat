@@ -1,7 +1,7 @@
 CREATE TABLE `products` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `category_id` int,
-  `user_id` int UNIQUE,
+  `user_id` int,
   `name` text,
   `description` text,
   `old_price` int,
@@ -21,7 +21,7 @@ CREATE TABLE `files` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
   `name` text,
   `path` text,
-  `product_id` int UNIQUE
+  `product_id` int
 );
 
 ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);

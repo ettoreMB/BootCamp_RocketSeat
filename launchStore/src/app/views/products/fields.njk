@@ -3,7 +3,7 @@
     <div>
         <select name="category_id">
             {% for category in categories %}
-            <option value="{{category.id}}" {% if products.category_id == category.id %}selected{%endif%}>
+            <option value="{{category.id}}" {% if product.category_id == category.id %}selected{%endif%}>
                 {{category.name}}
             </option>
             {%endfor%}
@@ -17,7 +17,7 @@
         <input 
             type="text"
             name="name"
-            value="{{products.name}}"
+            value="{{product.name}}"
         >
     </div>
 </div>
@@ -25,11 +25,11 @@
 <div class="item">
     <div>Description</div>
     <div>
-        <textarea name="description">{{products.description}}</textarea>
+        <textarea name="description">{{product.description}}</textarea>
     </div>
 </div>
 
-<!--<div class="item">
+<div class="item">
     <div>Picture</div>
     <div>
         <div id="photos-upload">
@@ -59,60 +59,66 @@
             {%endif%}
         </div>
     </div>
-</div> -->
+</div>
 
 <div class="item">
-    <div>Price</div>
+    <div>Valor</div>
     <div>
+
         <input 
-            type="text"
-            name="price"
-            placeholder="R$ "
-            value="{{product.price}}"
-            onkeydown="Mask.apply(this, 'formatBRL')"
-        >
+        type="text" 
+        name="price" 
+        placeholder="Preço do Produto" 
+        value="{{product.price}}"
+        onkeydown="Mask.apply(this,'formatBRL')">
     </div>
-    {%if product.old_price %}
-        <input type="hidden" name="old_price" value="{{products.old_price}}">
-    {%endif%}
+
+    {% if product.old_price %}
+    <input 
+    type="hidden" 
+    name="old_price" 
+    value="{{product.old_price}}">
+    {% endif %}
+
 </div>
+
 
 <div class="item">
     <div>Quantidade</div>
     <div>
+
         <input 
-            type="number"
-            name="quantity"
-            placeholder="Estoque Disponível"
-            value="{{products.quantity}}"
-        >
+        type="number" 
+        name="quantity" 
+        placeholder="Estoque Disponível" 
+        value="{{product.quantity}}">
+
     </div>
 </div>
 
-{%if (products.status == 1) or (products.status == 0)%}
+{% if (product.status == '1') or (product.status == 0 ) %}
 <div class="item">
-    <div>Disponível</div>
+    <div>Disponivel</div>
     <div>
         <span>
-            <input
-                type="radio"
-                name="status"
-                value="1"
-                {% if products.status == '1' %}
-                    checked
-                {% endif %}
-            > Sim
+            <input 
+            type="radio" 
+            name="status" 
+            value="1" 
+            {% if product.status == '1' %} 
+            checked 
+            {% endif %}> Sim
         </span>
-        <span>
-            <input
-                type="radio"
-                name="status"
-                value="0"
-                {% if products.status == '0' %}
-                    checked
-                {% endif %}
-            > Não
+
+
+        <span><input 
+            type="radio" 
+            name="status" 
+            value="0" 
+            {% if product.status == '0' %} 
+            checked 
+            {% endif %}> Não
         </span>
     </div>
 </div>
-{%endif%}
+{% endif %}

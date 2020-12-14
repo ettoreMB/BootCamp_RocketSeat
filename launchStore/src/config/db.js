@@ -1,17 +1,15 @@
-const mysql2 = require('mysql2/promise')
-const Bluebird = require('bluebird')
+const {Pool} = require('pg')
+
+
 
 module.exports = 
-         mysql2.createPool({
-        user: 'root',
-        password: "2507",
+        new Pool({
+        user: 'postgres',
+        password: "250791",
         host: 'localhost',
-        port: 3306,
-        database: 'launchstore',
-        waitForConnections: true,
-        connectionLimit: 10,
-        queueLimit: 0,
-        Promise: Bluebird
+        port:5432,
+        database: 'launchbase',
+
     })
 
      
