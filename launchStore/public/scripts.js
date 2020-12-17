@@ -48,8 +48,6 @@ handleFileInput(event) {//02
 
     const reader = new FileReader() // reader files
 
-    reader.readAsDataURL(file) //pegando arquivos local na máquina
-
   
     reader.onload = () => {
 
@@ -62,7 +60,7 @@ handleFileInput(event) {//02
       PhotosUpload.preview.appendChild(div);
     }
 
-    
+    reader.readAsDataURL(file)
   });
 
   PhotosUpload.input.files = PhotosUpload.getAllFiles(); // trocando o padrão files
@@ -79,8 +77,8 @@ hasLimit(e) {
   }
 
   const photoDiv = []; // array de fotos
-  preview.childNodes.forEach(function(item) {// cada item, filho dentro preview
-    if (item.classList && item.classList.value == "photo") {
+  preview.childNodes.forEach((item) => {// cada item, filho dentro preview
+    if (item.classList && item.classList.value == "photos") {
       photoDiv.push(item); // add as fotod
     }
   });
@@ -89,7 +87,7 @@ hasLimit(e) {
   const totalPhotos = fileList.length + photoDiv.length // 
   if (totalPhotos > uploadLimit) { //acima de upload limit
     alert('Você atingiu o limite máximo de fotos');
-    event.prenventDefault();
+    e.prenventDefault();
     return true
   }
   return false
@@ -98,17 +96,15 @@ getAllFiles(){// get all file
 
   const dataTransfer = new ClipboardEvent("").clipboardData || new DataTransfer() //constructor
   //para cada um fils add dataTransfer adicionar no items os arquivos
-  PhotosUpload.files.forEach(function(file) { // files do array
-    return dataTransfer.items.add(file)
-  });
+  PhotosUpload.files.forEach((file) => dataTransfer.items.add(file)) // files do array);
 
   return dataTransfer.files //retornando os arquivos
 },
 getContainer(image) {
   const div = document.createElement('div');
-  div.classList.add('photo'); 
+  div.classList.add('photos'); 
 
-  div.onclick = (e) => { return PhotosUpload.removePhoto(e) };// chamando a function para remover a div
+  div.onclick =  PhotosUpload.removePhoto;// chamando a function para remover a div
   div.appendChild(image) //<div> <image/> </div>
   div.appendChild(PhotosUpload.getRemoveButton()); //element i
 

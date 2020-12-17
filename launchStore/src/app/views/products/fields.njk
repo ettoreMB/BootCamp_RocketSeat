@@ -37,7 +37,7 @@
             id="photos-input"
             type="file" 
             name="photos" 
-            multiple = "multiple"
+            multiple ="multiple"
             accept="image/*"
             onchange="PhotosUpload.handleFileInput(event)"
             >
@@ -69,7 +69,7 @@
         type="text" handleFileInput(event)
         name="price" 
         placeholder="Preço do Produto" 
-        value="{{product.formatedPrice}}"
+        value="{{product.price}}"
         onkeydown="Mask.apply(this,'formatBRL')">
     </div>
 
