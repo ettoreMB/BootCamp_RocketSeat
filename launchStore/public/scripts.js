@@ -143,3 +143,40 @@ removeOldPhoto(event) {
   photoDiv.remove();
 }
 }
+
+
+//Gerenciamento galeria de imagens
+const ImageGallery = {
+  highLight: document.querySelector('.gallery .highlight > img'),
+  previews: document.querySelectorAll('.gallery-preview img'),
+
+  setImage(e) {
+    const {target} = e
+
+    ImageGallery.previews.forEach(preview => preview.classList.remove('active'))
+
+    target.classList.add('active')
+
+    ImageGallery.highLight.src = target.src
+    Lightbox.image.src = target.src
+  }
+}
+
+const Lightbox = {
+  target: document.querySelector('.lightbox-target'),
+  image: document.querySelector('.lightbox-target img'),
+  closeButtom: document.querySelector('.lightbox-target a.lightbox-close'),
+  open() {
+    Lightbox.target.style.opacity = 1
+    Lightbox.target.style.top = 0
+    Lightbox.target.style.bottom = 0
+    Lightbox.closeButtom.style.top = 0
+
+  },
+  close() {
+    Lightbox.target.style.opacity = 0
+    Lightbox.target.style.top = "-100%"
+    Lightbox.target.style.bottom = "initial"
+    Lightbox.closeButtom.style.top = "-100px"
+  }
+}

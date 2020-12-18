@@ -43,8 +43,8 @@ module.exports = {
         user_id=($2),
         name=($3),
         description=($4),
-        old_price=($5),
-        price=($6),
+        price=($5),
+        old_price=($6),
         quantity=($7),
         status=($8)
         WHERE id = $9
@@ -52,11 +52,11 @@ module.exports = {
     
      const values = [
       data.category_id,
-      data.user_id,
+      data.user_id || 1,
       data.name,
       data.description,
-      data.old_price,
       data.price,
+      data.old_price,
       data.quantity,
       data.status,
       data.id
