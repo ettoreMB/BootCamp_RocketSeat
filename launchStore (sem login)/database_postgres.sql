@@ -31,25 +31,10 @@ CREATE TABLE "files" (
   "product_id" int
 );
 
-CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text NOT NULL,
-  "email" text UNIQUE NOT NULL,
-  "password" text UNIQUE NOT NULL,
-  "cpf_cnpj" int UNIQUE NOT NULL,
-  "cep" text,
-  "address" text,   
-  "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
-);
-
---foreign Key
-
-ALTER TABLE "products" ADD FOREIGN KEY ("users_id") REFERENCES "users"("id");
 ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
+
 ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
 
---procedures
 
 CREATE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$
@@ -59,8 +44,6 @@ BEGIN
 END;
 $$LANGUAGE plpgsql;
 
-
--- auto updated at
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON products
 FOR EACH ROW
