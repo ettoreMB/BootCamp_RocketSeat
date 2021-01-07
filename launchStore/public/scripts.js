@@ -1,14 +1,11 @@
 const currentPage =  location.pathname
 const menuItems = document.querySelectorAll("header .navbar  a")
 
-
-
 for (item of menuItems) {
     if(currentPage.includes(item.getAttribute('href'))) {
         item.classList.add('active')
     }
 }
-
 
 const Mask = {
     apply(input, func) {
@@ -23,6 +20,30 @@ const Mask = {
           style: 'currency',
           currency: 'BRL'
         }).format(value / 100);
+      },
+
+      cpfCnpj(value) {
+        value = value.replace(/\D/g, "")
+
+        //check if is cnpj  - 11.222.333/0001-1
+        if(value.length > 11) {
+          // enter 1122233300011
+          value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/, "$1.$2.$3/$4-$5")
+          // return 11.222.333/0001-1
+          value = value.substr(0,17)
+        } else { // CPF 123.123.123-62
+          //enter 12312312362
+          value = value.replace(/(\d{3})(\d{3})(\d{3})(\d)/,"$1.$2.$3-$4")
+        }
+        return value
+      },
+
+      cep(value) {
+        value = value.replace(/\D/g, "")
+        value = value.replace(/(\d{5})(\d)/, "$1-$2")
+        value = value.substr(0,9)
+        
+        return value
       }
 }
 
@@ -144,7 +165,6 @@ removeOldPhoto(event) {
 }
 }
 
-
 //Gerenciamento galeria de imagens
 const ImageGallery = {
   highLight: document.querySelector('.gallery .highlight > img'),
@@ -178,5 +198,25 @@ const Lightbox = {
     Lightbox.target.style.top = "-100%"
     Lightbox.target.style.bottom = "initial"
     Lightbox.closeButtom.style.top = "-100px"
+  }
+}
+
+//Validate email 
+const Validate = {
+  apply(input, func) {
+    let results = Validate[func](input.value)
+    input.value = results.value
+
+    if(results.error) {
+      alert('Coloca um email valido')
+    }
+  },
+
+  isEmail(value) {
+    let error = null
+    return {
+      error,
+      value
+    }
   }
 }

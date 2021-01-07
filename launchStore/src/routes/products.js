@@ -1,9 +1,9 @@
 const express = require('express')
 const routes = express.Router()
-const multer = require('../middlewares/multer')
+const multer = require('../app/middlewares/multer')
 
-const productController = require('../controllers/productsController')
-const searchController = require('../controllers/searchController')
+const productController = require('../app/controllers/productsController')
+const searchController = require('../app/controllers/searchController')
 
 //Search
 routes.get('//search', searchController.index)

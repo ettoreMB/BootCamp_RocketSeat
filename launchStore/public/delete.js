@@ -7,3 +7,14 @@ formDelete.addEventListener("submit", (event) => {
         }
     
 })
+
+
+
+const formCreate = document.querySelector('.button')
+
+formCreate.addEventListener('submit', (event) =>{
+    const confirm = confirm("eseja se Registrar? ")
+    if(!confirm) {
+        event.preventDefault()
+    }
+})
