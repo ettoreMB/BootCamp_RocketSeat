@@ -21,14 +21,14 @@
           </a>
         </li>
         <li class="accounts">
-          <a href="/accounts">
+          <a href="/users/accounts">
             <i class="material-icons">account_circle</i>
             Minha Conta
           </a>
           {% if session.userId %}
           <ul class="submenu">
-            <li><a href="/users">Minha Conta</a></li>
-            <li><a href="/users/ads">Meus Anúncios</a></li>
+            <li><a href="/users/accounts">Minha Conta</a></li>
+            <li><a href="/ads/create">Meus Anúncios</a></li>
             <li><a href="/selling">Minhas Vendas</a></li>
             <li>
               <form action="/users/logout" method="POST">

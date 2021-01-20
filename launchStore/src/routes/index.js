@@ -11,7 +11,7 @@ const users = require("./users")
 routes.get("/", HomeController.index)
 
 routes.use("/users", users)
-//routes.use("/products", products)
+routes.use("/products", products)
 //routes.use("/cart", cart)
 //routes.use("/orders", orders)
 
@@ -20,7 +20,7 @@ routes.get("/ads/create", function (req, res) {
   return res.redirect("/products/create")
 })
 
-routes.get("/user/accounts", function (req, res) {
+routes.get("/users/accounts", function (req, res) {
   return res.redirect("/users/register")
 })
 

@@ -6,12 +6,12 @@ const productController = require('../app/controllers/productsController')
 const searchController = require('../app/controllers/searchController')
 
 //Search
-routes.get('//search', searchController.index)
+routes.get('/search', searchController.index)
 
 //Products
-routes.get('//create', productController.create)
-routes.get('//:id', productController.show )
-routes.get('//:id/edit', productController.edit)
+routes.get('/create', productController.create)
+routes.get('/:id', productController.show )
+routes.get('/:id/edit', productController.edit)
 
 
 //create product

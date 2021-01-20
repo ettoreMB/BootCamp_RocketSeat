@@ -25,6 +25,10 @@ const Mask = {
       cpfCnpj(value) {
         value = value.replace(/\D/g, "")
 
+        if(value.length >14) {
+          value.splice(0,-1)
+        }
+
         //check if is cnpj  - 11.222.333/0001-1
         if(value.length > 11) {
           // enter 1122233300011
@@ -204,19 +208,83 @@ const Lightbox = {
 //Validate email 
 const Validate = {
   apply(input, func) {
+
+    Validate.clearErrors(input)
+
     let results = Validate[func](input.value)
     input.value = results.value
 
     if(results.error) {
-      alert('Coloca um email valido')
+      Validate.displayError(input,results.error)
     }
+
+    //input.focus() //prevent input leaving
+  },
+
+  displayError(inpput, error) {
+    const div = document.createElement('div')
+    div.classList.add('error')
+    div.innerHTML = error
+    inpput.parentNode.appendChild(div)
+
+    inpput.focus()
+  },
+  clearErrors(input) {
+    const errorDiv = input.parentNode.querySelector(".error")
+    if(errorDiv)
+      errorDiv.remove()
+    
   },
 
   isEmail(value) {
+    let error = null 
+      //^\w+ = aa
+      //^\w+([\.-]?\w+) aa.aa / aa-aa
+      //*^\w+([\.-]?\w+)*@w+([\.-]?\w+) aa.aa@aaa
+      //^\w+([\.-]?\w+)*@w+([\.-]?\w+)*(\.\w{2,3}+)  aa.aa@aa.com/net
+      //*(\.\w{2,3}+) @.com.br
+      const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ //$ end 
+
+      if(!value.match(mailFormat)) {
+        error = 'Email Invalido'
+      }
+
+      return {
+        error,
+        value
+      }
+  },
+  isCpfCnpj(value) {
     let error = null
+
+    const cleanValues = value.replace(/\D/g, "")
+
+    if(cleanValues.length > 11 && cleanValues.length != 13) {
+      error = "CNPJ incorreto"
+    } else if (cleanValues.length < 12 && cleanValues.length !== 11) {
+      error = "CPF incorreto"
+    }
+
     return {
       error,
       value
     }
-  }
+  },
+
+  isCEP(value) {
+    let error = null
+
+    const cleanCEP = value.replace(/\D/g, "")
+
+    if(cleanCEP.length !== 8){
+      error = "CEP incorreto"
+    }
+
+    return {
+      error,
+      value
+    }
+  },
+
+
 }
