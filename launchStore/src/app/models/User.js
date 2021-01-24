@@ -1,6 +1,7 @@
 const { create } = require('browser-sync')
 const db =require('../../config/db')
 const {hash} = require('bcryptjs')
+const { update } = require('../controllers/userController')
 
 module.exports = {
   async findOne(filters) {
@@ -55,5 +56,26 @@ module.exports = {
     ]
     const results = await db.query(query, values)
     return results.rows[0].id
+  },
+
+  async update(id, fields) {
+    let query = "UPDATE users SET"
+
+    Object.keys(fields).map((key, index, array) => {
+      if ((index + 1) < array.length) {
+        query = `${query}
+          ${key} = '${fields[key]}',
+        `
+      } else {
+        // Last iteration
+        query = `${query}
+        ${key} = '${fields[key]}'
+        WHERE id = ${id}
+      `
+      }
+    await db.query(query)
+    return
+
+    })
   }
 }
