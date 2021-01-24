@@ -20,8 +20,8 @@ routes.get("/ads/create", function (req, res) {
   return res.redirect("/products/create")
 })
 
-routes.get("/users/accounts", function (req, res) {
-  return res.redirect("/users/register")
+routes.get("/users", function (req, res) {
+  return res.redirect("/users/index")
 })
 
 

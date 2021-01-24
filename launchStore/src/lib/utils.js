@@ -40,6 +40,33 @@ module.exports = {
           style: 'currency',
           currency: 'BRL'
         }).format(price/100);
+    },
+    formatCpfCnpj(value) {
+        value = value.replace(/\D/g, "")
+
+        if(value.length >14) {
+          value.splice(0,-1)
+        }
+
+        //check if is cnpj  - 11.222.333/0001-1
+        if(value.length > 11) {
+          // enter 1122233300011
+          value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/, "$1.$2.$3/$4-$5")
+          // return 11.222.333/0001-1
+          value = value.substr(0,17)
+        } else { // CPF 123.123.123-62
+          //enter 12312312362
+          value = value.replace(/(\d{3})(\d{3})(\d{3})(\d)/,"$1.$2.$3-$4")
+        }
+        return value
+      },
+
+      formatCep(value) {
+        value = value.replace(/\D/g, "")
+        value = value.replace(/(\d{5})(\d)/, "$1-$2")
+        value = value.substr(0,9)
+        
+        return value
       }
 }
 
