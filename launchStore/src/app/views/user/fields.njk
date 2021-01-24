@@ -26,10 +26,17 @@
   <div>Senha</div>
   <div class="input">
     <input 
-      type="text" 
-      name="password" 
-      placeholder="Digite sua senha"
-      required="required"
+      type="password" 
+      name="password"
+      required
+      {% if not user.id %}
+        placeholder="Escolha uma senha" 
+        {% esle %}
+        placeholder="Digite sua senha" 
+
+      {% endif %}
+      
+    
     >
   </div>
 </div>
