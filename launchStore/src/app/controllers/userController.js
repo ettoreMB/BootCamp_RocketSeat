@@ -4,10 +4,12 @@ const {
   formatCpfCnpj
 } = require('../../lib/utils')
 
+// eslint-disable-next-line no-undef
 module.exports = {
   registerForm(req, res) {
     return res.render('user/register')
   },
+
   async show(req, res) {
     const {
       user
@@ -29,7 +31,7 @@ module.exports = {
 
 
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   },
   async update(req, res) {
@@ -59,5 +61,5 @@ module.exports = {
 
 
     }
-  }
+  },
 }

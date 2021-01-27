@@ -49,7 +49,7 @@ async function post (req, res, next) {
    if (password != passwordrepeat) return res.render('user/register', {
      user: req.body,
      error: 'O campo da senha eta diferente'
-   })
+   }) 
        
    
       

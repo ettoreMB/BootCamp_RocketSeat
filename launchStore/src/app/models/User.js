@@ -1,7 +1,5 @@
-const { create } = require('browser-sync')
 const db =require('../../config/db')
 const {hash} = require('bcryptjs')
-const { update } = require('../controllers/userController')
 
 module.exports = {
   async findOne(filters) {
@@ -73,9 +71,8 @@ module.exports = {
         WHERE id = ${id}
       `
       }
-    await db.query(query)
-    return
-
     })
+    await db.query(query)
+    return 
   }
 }
