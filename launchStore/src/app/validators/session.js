@@ -36,9 +36,10 @@ async function forgot (req, res, next) {
     let user = await User.findOne({where: {email}})
 
     if(!user) return res.render('session/forgot-password', {
+      user: req.body,
       error: 'email nao cadastrado'
     })
-
+    req.user = user
     next()
 
   } catch (error) {

@@ -38,7 +38,9 @@ CREATE TABLE "users" (
   "password" text UNIQUE NOT NULL,
   "cpf_cnpj" text UNIQUE NOT NULL,
   "cep" text,
-  "address" text,   
+  "address" text,
+  "reset_token" text,
+  "reset_token_expires" text, 
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );

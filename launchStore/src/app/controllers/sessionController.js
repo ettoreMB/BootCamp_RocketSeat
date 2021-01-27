@@ -1,4 +1,7 @@
 const User = require('../models/User')
+const mailer = require('../../lib/mailer')
+const crypto = require('crypto')
+
 
 module.exports = {
   loginForm(req, res) {
@@ -19,7 +22,43 @@ module.exports = {
     return res.render('session/forgot-password')
   },
 
-  forgot(req, res){
+  async forgot(req, res){
+    const user = req.user
+   try {
+    
+    // token for user
+    const  token = crypto.randomBytes(20).toString('hex')
 
+    //create token expire
+    let now = new Date()
+    now = now.setHours(now.getHours() + 1) // add one hour after now
+
+    await User.update(user.id, {
+      reset_token: token,
+      reset_token_expires : now
+    })
+    //send link - email
+    await mailer.sendMail({
+      to: user.email,
+      from: 'no-reply@laucnhstore.com.br',
+      subject: 'Recuperação de Senha',
+      html: `<h2>Perdeu a chave?</h2>
+            <p>Não se preocupe, clique no link abaixo para recuperar sua senha</p>
+            <p>
+              <a href="http://localhost:3000/users/password-reset?token=${token}" target="blank">Clique Aqui!!</a>
+            </p>
+      `
+
+    })
+    // warn
+    return res.render("session/forgot-password", {
+      succes: 'Verifique sua caixa de email !!!'
+    })
+   } catch (error) {
+     console.error(error)
+     return res.render("session/forgot-password", {
+      error: "Erro inesperado, tente novamente"
+    })
+   }
   }
 }

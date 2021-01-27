@@ -72,7 +72,7 @@ module.exports = {
       `
       }
     })
-    await db.query(query)
-    return 
+    return db.query(query)
+    
   }
 }
