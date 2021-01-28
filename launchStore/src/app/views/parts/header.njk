@@ -20,12 +20,14 @@
             Novo Anúncio
           </a>
         </li>
+        
+        {% if session.userId %}
         <li class="accounts">
           <a href="/login">
             <i class="material-icons">account_circle</i>
-            Minha Conta
+            {{user.name}}
           </a>
-          {% if session.userId %}
+          
           <ul class="submenu">
             <li><a href="/users/accounts">Minha Conta</a></li>
             <li><a href="/products/create">Meus Anúncios</a></li>
@@ -36,7 +38,15 @@
               </form>
             </li>
           </ul>
+          {% else %}
+          <li class="accounts">
+            <a href="/login">
+              <i class="material-icons">account_circle</i>
+              Minha Conta
+            </a>
+          </li>
           {% endif %}
+          
         </li>
         <li class="cart">
           <a href="/cart">

@@ -15,19 +15,19 @@ routes.post('/login', SessionValidator.login,sessionController.login)
 routes.post('/logout', sessionController.logout)
 
 // //reset/ forgot password
-routes.get('/forgot-password', SessionValidator.forgot, sessionController.forgotForm)
-// routes.get('/password-reset', sessionController.resetForm)
+routes.get('/forgot-password', sessionController.forgotForm)
+routes.get('/password-reset', sessionController.resetForm)
 routes.post('/forgot-password', SessionValidator.forgot, sessionController.forgot)
-// routes.post('/password-reset', sessionController.reset )
+routes.post('/password-reset',SessionValidator.reset, sessionController.reset )
 
 
 // //userController Register
 routes.get('/register', userController.registerForm)
 routes.post('/register', UserValidaor.post, userController.post)
 
-routes.get('/',onlyUsers,UserValidaor.show, userController.show)
+routes.get('/accounts',onlyUsers,UserValidaor.show, userController.show)
 routes.put('/', UserValidaor.update, userController.update)
-// routes.delete('/', userController.delete)
+routes.delete('/', userController.delete)
 
 
  module.exports = routes

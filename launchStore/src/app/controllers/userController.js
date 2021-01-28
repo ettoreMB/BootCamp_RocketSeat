@@ -4,23 +4,19 @@ const {
   formatCpfCnpj
 } = require('../../lib/utils')
 
+
 // eslint-disable-next-line no-undef
 module.exports = {
   registerForm(req, res) {
     return res.render('user/register')
   },
-
   async show(req, res) {
-    const {
-      user
-    } = req
+    const { user } = req
 
     user.cpf_cnpj = formatCpfCnpj(user.cpf_cnpj)
     user.cep = formatCep(user.cep)
 
-    return res.render('user/index', {
-      user
-    })
+    return res.render('user/index', { user: req.body})
   },
   async post(req, res) {
     try {
@@ -62,4 +58,20 @@ module.exports = {
 
     }
   },
+  async delete(req, res) {
+    try {
+      await User.delete(req.body.id)
+      req.session.destroy()
+
+      return res.render('session/login',{
+        success: 'ACCOUNT DELETED'
+      })
+    } catch (error) {
+      console.error(error)
+      return res.render('user/index',{
+        user: req.body,
+        error: 'Error ! try it later again '
+      })
+    }
+  }
 }
